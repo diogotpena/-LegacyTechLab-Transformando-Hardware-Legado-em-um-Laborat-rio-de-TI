@@ -1,0 +1,29 @@
+ Unable to create file: [0x00000003] O sistema não pode encontrar o caminho especificado.
+
+Found USB 2.0 device 'SAMSUNG HD502HI USB Device' (067B:2773)
+NOTE: This device is a USB 3.0 device operating at lower speed...
+Device eliminated because it was detected as a Hard Drive or SSD (score 15 > 0)
+If this device is not a Hard Drive or SSD, please e-mail the author of this application
+NOTE: You can enable the listing of Hard Drives under 'advanced drive properties'
+Found USB 3.0 device 'Innostor Ext. HDD USB Device' (1F75:0621)
+Device eliminated because it was detected as a Hard Drive or SSD (score 21 > 0)
+If this device is not a Hard Drive or SSD, please e-mail the author of this application
+NOTE: You can enable the listing of Hard Drives under 'advanced drive properties'
+Found UAS (USB 2.0) device 'INFOKIT USB 3.1 UAS Device' (152D:0583)
+NOTE: This device is a USB 3.1 device operating at lower speed...
+Device eliminated because it was detected as a Hard Drive or SSD (score 13 > 0)
+If this device is not a Hard Drive or SSD, please e-mail the author of this application
+NOTE: You can enable the listing of Hard Drives under 'advanced drive properties'
+Found UAS (USB 2.0) device 'JMicron Generic UAS Device' (152D:0576)
+NOTE: This device is a USB 3.0 device operating at lower speed...
+Device eliminated because it was detected as a Hard Drive or SSD (score 13 > 0)
+If this device is not a Hard Drive or SSD, please e-mail the author of this application
+NOTE: You can enable the listing of Hard Drives under 'advanced drive properties'
+Found USB 2.0 device 'WDC WD50 00LPCX-21VHAT0 USB Device' (067B:2773)
+NOTE: This device is a USB 3.0 device operating at lower speed...
+Device eliminated because it was detected as a Hard Drive or SSD (score 20 > 0)
+If this device is not a Hard Drive or SSD, please e-mail the author of this application
+NOTE: You can enable the listing of Hard Drives under 'advanced drive properties'
+Found non-USB removable device 'SP512L1-4TYAMDG2' => Eliminated
+0 devices found
+Process search thread is not started!
