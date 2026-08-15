@@ -1,656 +1,296 @@
-# 🖥️ LegacyTechLab — Transformando Hardware Legado em um Laboratório de TI
+# LegacyTechLab — Transformando Hardware Legado em um Laboratório de TI
 
-> Projeto de reaproveitamento e modernização tecnológica de hardware legado, transformando um notebook antigo em uma plataforma prática para estudos e experimentos em **Linux, Redes, Infraestrutura de TI, Cloud e Cibersegurança**.
+O **LegacyTechLab** transforma um notebook Positivo Premium Select 7050 em um laboratório prático para estudos de Linux, Redes, Infraestrutura, Cloud, Cibersegurança e automação.
 
----
+O projeto documenta não apenas o resultado final, mas também os problemas encontrados, as hipóteses investigadas, as soluções aplicadas e as validações realizadas.
 
-## 📌 Sobre o projeto
+## 🎯 Objetivos
 
-O **LegacyTechLab** nasceu com dois objetivos principais:
+- Reaproveitar hardware legado como laboratório de TI.
+- Praticar administração Linux e troubleshooting.
+- Construir uma base para estudos de Redes, Infraestrutura, Cloud e Cibersegurança.
+- Registrar decisões técnicas e evidências de forma reproduzível.
+- Transformar limitações reais de hardware em oportunidades de aprendizagem.
 
-1. **Criar um laboratório prático de Linux e Infraestrutura de TI**;
-2. **Reaproveitar hardware legado em um contexto tecnológico atual**, explorando diferentes tecnologias e conceitos de TI.
-
-A proposta é demonstrar que um equipamento antigo, mesmo possuindo limitações de processamento e recursos, ainda pode ser utilizado como uma **plataforma de aprendizagem, experimentação e troubleshooting**.
-
-O projeto começou com a análise de diferentes distribuições Linux e evoluiu para a preparação de um ambiente com **Xubuntu 24.04**, utilizando o notebook como base para futuros laboratórios.
-
-A ideia, entretanto, vai além da instalação de um sistema operacional.
-
-O notebook será utilizado como uma plataforma para explorar diferentes áreas da tecnologia:
-
-```text
-                    LegacyTechLab
-                         │
-              Hardware Legado
-                         │
-                         ▼
-                  Linux / Xubuntu
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-       Redes        Infraestrutura      Linux
-        │                │                │
-        └────────────────┼────────────────┘
-                         │
-              ┌──────────┴──────────┐
-              │                     │
-            Cloud             Cibersegurança
-```
-
----
-
-# 🎯 Objetivos
-
-## Objetivo principal
-
-Transformar um equipamento de hardware legado em uma **plataforma de laboratório para aprendizagem prática de tecnologias de TI**.
-
-## Objetivos específicos
-
-### 🐧 Linux
-
-- Instalar e configurar Linux;
-- compreender o processo de boot;
-- trabalhar com terminal;
-- estudar Bash;
-- administrar usuários e permissões;
-- trabalhar com processos e serviços;
-- analisar logs;
-- realizar troubleshooting.
-
-### 🌐 Redes
-
-- Configuração TCP/IP;
-- endereçamento IP;
-- DNS;
-- DHCP;
-- SSH;
-- diagnóstico de conectividade;
-- análise de tráfego;
-- conceitos de roteamento.
-
-### 🏗️ Infraestrutura
-
-- Serviços Linux;
-- administração de sistemas;
-- armazenamento;
-- automação;
-- monitoramento;
-- gerenciamento de recursos;
-- troubleshooting de infraestrutura.
-
-### ☁️ Cloud
-
-A infraestrutura física do laboratório será utilizada como ambiente de preparação para estudos de cloud computing, incluindo:
-
-- ferramentas CLI;
-- conceitos de infraestrutura;
-- armazenamento;
-- IAM;
-- automação;
-- monitoramento;
-- integração entre ambiente local e serviços cloud.
-
-> A utilização de serviços Cloud não depende necessariamente da capacidade computacional do notebook. O equipamento será utilizado como **estação de administração, laboratório e cliente**, enquanto os recursos computacionais podem ser fornecidos por plataformas cloud.
-
-### 🔐 Cibersegurança
-
-O laboratório também poderá ser utilizado para estudos controlados de:
-
-- hardening Linux;
-- gerenciamento de usuários;
-- permissões;
-- firewall;
-- SSH;
-- logs;
-- auditoria;
-- análise de serviços;
-- identificação de vulnerabilidades;
-- segurança de redes.
-
-Todos os testes de segurança serão realizados em ambientes próprios e controlados.
-
----
-
-# 🖥️ Hardware do laboratório
+## 🖥️ Hardware
 
 | Componente | Especificação |
 |---|---|
-| Notebook | Positivo Premium Select 7050 |
-| Processador | Intel Core i3 de 1ª geração |
-| Memória RAM | 8 GB DDR3 |
-| SSD | Aproximadamente 240 GB |
-| Armazenamento adicional | HD para arquivos pessoais |
-| Sistema existente | Windows |
-| Sistema Linux planejado | Xubuntu 24.04 |
-| Interface gráfica | Xfce |
+| Equipamento | Positivo Premium Select 7050 |
+| CPU | Intel Core i3 M350 — 1ª geração |
+| RAM | 8 GB DDR3 |
+| SSD principal | ~240 GB — `/dev/sda` |
+| HDD secundário | ~320 GB — `/dev/sdb` |
+| Tabela de partições | DOS/MBR |
+| Modo de boot | Legacy/BIOS |
 
-O equipamento representa deliberadamente um cenário de **hardware limitado/legado**.
-
-Isso permite estudar uma questão relevante de infraestrutura:
-
-> **Como extrair utilidade tecnológica de recursos computacionais que já não são adequados para os padrões atuais de desktops?**
-
----
-
-# 💡 Conceito do projeto
-
-O LegacyTechLab trabalha com a ideia de:
+### Estrutura final do SSD
 
 ```text
-Hardware antigo
-      ↓
-Avaliação técnica
-      ↓
-Escolha de software adequado
-      ↓
-Modernização
-      ↓
-Laboratório
-      ↓
-Experimentação
-      ↓
-Documentação
-      ↓
-Conhecimento técnico
+/dev/sda
+├── sda1 — NTFS — Windows Boot
+├── sda2 — NTFS — Windows
+├── sda3 — NTFS — Recovery
+└── sda4 — ext4 — Xubuntu
 ```
 
-O hardware não é considerado apenas um equipamento antigo.
+## 🐧 Sistema final
 
-Ele é tratado como uma **plataforma de experimentação**.
+- **Xubuntu 24.04.4 LTS**
+- **Kernel 6.8.0-31-generic**
+- `/dev/sda4` — ext4
+- UUID: `e7b99872-a6bc-4efa-bb18-72cbf0993369`
+- GRUB `i386-pc`
+- Dual boot Windows + Xubuntu
 
----
-
-# 🧩 Por que reaproveitar hardware legado?
-
-Equipamentos antigos normalmente apresentam limitações relacionadas a:
-
-- processamento;
-- memória;
-- armazenamento;
-- compatibilidade;
-- suporte a tecnologias modernas.
-
-Por outro lado, essas limitações também podem ser utilizadas como oportunidade de aprendizado.
-
-Um ambiente com recursos restritos força decisões relacionadas a:
-
-- eficiência;
-- gerenciamento de recursos;
-- escolha de software;
-- otimização;
-- monitoramento;
-- troubleshooting;
-- arquitetura.
-
-Esses conhecimentos são relevantes para profissionais de infraestrutura mesmo quando trabalham posteriormente com ambientes muito mais modernos.
-
----
-
-# 🐧 Primeiro laboratório: Linux
-
-A primeira etapa do LegacyTechLab é a criação de um ambiente Linux.
-
-Inicialmente foram avaliadas alternativas como:
-
-- Debian 12;
-- Ubuntu;
-- Xubuntu.
-
-Após considerar o hardware disponível e o objetivo do laboratório, o projeto foi direcionado para:
-
-## Xubuntu 24.04
-
-A escolha está relacionada principalmente ao ambiente gráfico **Xfce**, buscando uma experiência adequada às limitações do equipamento.
-
-O Xubuntu representa a **primeira camada de software do laboratório**, e não o objetivo final do projeto.
-
----
-
-# 💾 Arquitetura inicial
-
-A arquitetura planejada inicialmente é:
+## 🧭 Evolução do projeto
 
 ```text
-┌───────────────────────────────────────┐
-│              Notebook                 │
-│        Positivo Premium Select 7050   │
-├───────────────────────────────────────┤
-│                                       │
-│  SSD ~240 GB                          │
-│  ├── Windows                          │
-│  └── Xubuntu 24.04                    │
-│                                       │
-├───────────────────────────────────────┤
-│                                       │
-│  HD separado                          │
-│  └── Arquivos pessoais                │
-│                                       │
-└───────────────────────────────────────┘
+Hardware legado
+      ↓
+Diagnóstico
+      ↓
+Preparação do Windows
+      ↓
+Criação da mídia USB
+      ↓
+Problemas de boot
+      ↓
+Problemas de particionamento
+      ↓
+Troubleshooting do Subiquity
+      ↓
+GParted e validação do armazenamento
+      ↓
+Instalação manual com debootstrap + chroot
+      ↓
+Kernel + initramfs + Xubuntu Desktop
+      ↓
+GRUB
+      ↓
+Entrada manual do Windows
+      ↓
+fstab + hostname + hosts
+      ↓
+Validação final
+      ↓
+🟢 LABORATÓRIO FUNCIONAL
 ```
 
-O objetivo inicial é implementar **dual boot**, mantendo o Windows existente.
+## ⚙️ Problemas encontrados e soluções
 
-O HD utilizado para arquivos pessoais deverá permanecer preservado durante todo o processo.
+### 1. Rufus e mídia de instalação
 
----
+Durante a preparação da mídia foram observadas mensagens relacionadas a DBX/Secure Boot, versão do GRUB e o erro `0xC0030003`.
 
-# 🔎 Diagnóstico inicial
-
-Antes da instalação foram realizadas análises do ambiente.
-
-## Modo de inicialização
-
-Foi identificado:
+As evidências do Rufus estão organizadas em:
 
 ```text
-BIOS: Legacy / Herdado
+screenshots/Rufus/
 ```
 
-## Tabela de partição
+### 2. Problema de particionamento
 
-Foi identificado:
+O Subiquity apresentou:
 
 ```text
-Disklabel type: dos
+ValueError: new partition too large
 ```
 
-Esse resultado indica uma estrutura compatível com **DOS/MBR**.
+Foram comparados valores apresentados pelo instalador e pelas ferramentas de particionamento, considerando GB, GiB, MB, MiB e bytes.
 
-Essas informações foram importantes para determinar a estratégia de preparação da mídia e do futuro processo de instalação.
-
----
-
-# 💽 Armazenamento
-
-Durante o diagnóstico foram observados aproximadamente:
+Foram utilizados:
 
 ```text
-Espaço utilizado: 53,8 GB
-Espaço livre:     168 GB
-Capacidade:       222 GB
+fdisk
+parted
+lsblk
+blkid
+GParted
 ```
 
-Esses dados foram utilizados para avaliar a possibilidade de instalar Linux preservando o sistema Windows.
+### 3. Instalação manual
 
----
-
-# 🛠️ Troubleshooting
-
-O LegacyTechLab também funciona como um projeto de **troubleshooting documentado**.
-
-Durante a criação da mídia USB utilizando o Rufus foram encontrados diferentes problemas.
-
-## Rufus — DBX
-
-Foi apresentada uma mensagem relacionada à atualização dos arquivos **DBX**, utilizados nas verificações de revogação do UEFI Secure Boot.
-
-O equipamento, entretanto, foi identificado como utilizando BIOS Legacy, portanto a mensagem foi analisada dentro do contexto específico do ambiente.
-
----
-
-## Rufus — GRUB
-
-Também foi apresentada uma mensagem relacionada à versão do GRUB:
+Após as dificuldades do instalador gráfico, a instalação foi concluída manualmente utilizando:
 
 ```text
-Esta imagem usa o Grub 2.12,
-mas este aplicativo inclui somente os arquivos
-de instalação para Grub 2.14.
+debootstrap
+chroot
+kernel
+initramfs
+xubuntu-desktop
 ```
 
-A ocorrência foi registrada para investigação da compatibilidade entre:
+### 4. GRUB e Windows
 
-- ISO;
+O `os-prober` estava instalado, mas não criou automaticamente a entrada do Windows.
+
+Foi criada uma entrada manual:
+
+```text
+menuentry "Windows" {
+    insmod part_msdos
+    insmod ntfs
+    insmod chain
+    set root=(hd0,msdos1)
+    chainloader +1
+}
+```
+
+### 5. Sistema inicialmente montado como somente leitura
+
+Durante o primeiro boot, `/dev/sda4` foi montada como `ro`.
+
+A investigação identificou que `/etc/fstab` ainda continha:
+
+```text
+# UNCONFIGURED FSTAB FOR BASE SYSTEM
+```
+
+Foi então configurada a montagem persistente:
+
+```text
+UUID=e7b99872-a6bc-4efa-bb18-72cbf0993369 / ext4 defaults 0 1
+```
+
+Após a correção, a raiz passou a ser validada como:
+
+```text
+/dev/sda4 ext4 rw,relatime
+```
+
+### 6. Hostname e `/etc/hosts`
+
+Também foi corrigido o arquivo `/etc/hosts`, incluindo:
+
+```text
+127.0.0.1 localhost
+127.0.1.1 xubuntu
+```
+
+A resolução do hostname foi posteriormente validada com `getent`.
+
+## 🧪 Validação final
+
+### Boot
+
+- ✅ GRUB
+- ✅ Windows
+- ✅ Xubuntu
+- ✅ Reboot
+
+### Sistema Linux
+
+- ✅ Login do usuário `diogo`
+- ✅ `/dev/sda4` em `rw`
+- ✅ `/etc/fstab` configurado
+- ✅ `/etc/hosts` corrigido
+- ✅ Hostname resolvido
+- ✅ Ambiente gráfico Xubuntu
+- ✅ LightDM
+
+### Resultado
+
+**Windows + Xubuntu funcionando em dual boot.**
+
+## 🛠️ Destaques técnicos
+
+- Diagnóstico de `ValueError: new partition too large`.
+- Troubleshooting de particionamento.
+- Comparação de GB/GiB/MB/MiB/bytes.
+- Uso de `fdisk`, `parted`, `lsblk`, `blkid` e GParted.
+- Instalação manual via `debootstrap`.
+- Administração de `chroot`.
+- Instalação e validação de kernel e initramfs.
+- Instalação do Xubuntu Desktop.
+- Instalação do GRUB `i386-pc`.
+- Investigação do `os-prober`.
+- Criação de entrada manual de boot do Windows.
+- Configuração de `/etc/fstab`.
+- Configuração de hostname e `/etc/hosts`.
+- Validação pós-reboot.
+
+## 📚 Documentação
+
+A pasta `docs/` contém a documentação detalhada das etapas do laboratório, incluindo:
+
+- contexto e objetivos;
+- hardware;
+- avaliação do equipamento;
+- escolha do Xubuntu;
+- planejamento do dual boot;
+- boot;
 - Rufus;
+- particionamento;
+- troubleshooting;
+- instalação manual;
 - GRUB;
-- modo de boot;
-- estrutura da imagem.
+- configuração do Xubuntu;
+- validação;
+- lições aprendidas.
 
----
+## 📸 Evidências
 
-## Rufus — erro `0xC0030003`
-
-Durante uma tentativa de criação da mídia foi apresentado:
-
-```text
-Erro: [0xC0030003]
-```
-
-Também foi registrado:
+As evidências visuais estão organizadas por etapa:
 
 ```text
-unable to create file [0x00000003]
+screenshots/
+├── Rufus/
+├── BIOS/
+├── Boot/
+├── Partitioning/
+├── Troubleshooting/
+├── Installation/
+├── Manual-Install/
+└── Validation/
 ```
 
-A criação da mídia foi considerada incompleta até que o processo pudesse ser concluído e validado através de um boot real.
-
----
-
-# 🧪 Metodologia de troubleshooting
-
-O laboratório segue uma abordagem baseada em diagnóstico:
+Capturas intermediárias ou repetitivas não foram eliminadas. Elas permanecem separadas em:
 
 ```text
-Problema
-   ↓
-Coleta de informações
-   ↓
-Hipótese
-   ↓
-Teste controlado
-   ↓
-Registro
-   ↓
-Análise do resultado
-   ↓
-Nova hipótese
+screenshots/Archive-Redundantes/
 ```
 
-O objetivo não é simplesmente "fazer funcionar".
+Essa separação permite manter o histórico completo sem sobrecarregar a documentação principal.
 
-O objetivo é entender:
+Os logs técnicos utilizados durante o projeto também foram preservados no repositório.
 
-> **Por que não funcionou?**
+## 🧠 Lições aprendidas
 
-E posteriormente:
+O projeto demonstrou que a instalação de um sistema operacional em hardware legado pode exigir mais do que seguir o fluxo de uma ferramenta gráfica.
 
-> **O que foi alterado para funcionar?**
+Os principais aprendizados foram:
 
-Essa documentação será mantida no repositório para que cada problema se transforme em conhecimento reutilizável.
+1. Validar resultados de ferramentas automatizadas.
+2. Interpretar corretamente unidades de armazenamento.
+3. Trabalhar com ferramentas de baixo nível quando necessário.
+4. Utilizar evidências para conduzir o troubleshooting.
+5. Diferenciar hipótese, teste, resultado e solução.
+6. Utilizar linha de comando para recuperar ou concluir uma instalação.
+7. Documentar problemas, e não apenas o resultado final.
 
----
+## 🔭 Próximas etapas
 
-# 🗺️ Roadmap
+Com a base Linux funcional, o LegacyTechLab poderá evoluir para:
 
-## Fase 1 — Recuperação e diagnóstico
+- Redes e serviços Linux;
+- administração de servidores;
+- monitoramento;
+- virtualização e containers;
+- automação;
+- fundamentos de Cloud;
+- práticas de Cibersegurança;
+- testes de infraestrutura;
+- projetos de troubleshooting e documentação.
 
-- [x] Identificar hardware
-- [x] Identificar CPU
-- [x] Identificar RAM
-- [x] Identificar armazenamento
-- [x] Identificar modo de boot
-- [x] Identificar tabela de partição
-- [x] Avaliar espaço disponível
-- [x] Registrar problemas encontrados
+## 📌 Princípio do projeto
 
-## Fase 2 — Linux
+> **Diagnosticar → Planejar → Implementar → Testar → Documentar → Evoluir**
 
-- [x] Comparar distribuições
-- [x] Definir Xubuntu
-- [ ] Criar mídia USB funcional
-- [ ] Inicializar ambiente Live
-- [ ] Instalar Xubuntu
-- [ ] Configurar sistema
-- [ ] Validar dual boot
-- [ ] Documentar administração básica
+O objetivo não é apenas fazer o equipamento funcionar, mas transformar cada problema encontrado em uma oportunidade de aprendizagem técnica.
 
-## Fase 3 — Redes
-
-- [ ] Configuração TCP/IP
-- [ ] Diagnóstico de conectividade
-- [ ] DNS
-- [ ] DHCP
-- [ ] SSH
-- [ ] Routing
-- [ ] Análise de tráfego
-
-## Fase 4 — Infraestrutura
-
-- [ ] Serviços Linux
-- [ ] Servidor SSH
-- [ ] Compartilhamento de arquivos
-- [ ] Monitoramento
-- [ ] Automação Bash
-- [ ] Gerenciamento de recursos
-
-## Fase 5 — Cloud
-
-- [ ] CLI de provedor Cloud
-- [ ] IAM
-- [ ] Armazenamento Cloud
-- [ ] Monitoramento
-- [ ] Automação
-- [ ] Integração entre ambiente local e Cloud
-
-## Fase 6 — Cibersegurança
-
-- [ ] Hardening Linux
-- [ ] Firewall
-- [ ] Segurança SSH
-- [ ] Auditoria de logs
-- [ ] Análise de serviços
-- [ ] Monitoramento
-- [ ] Laboratórios de segurança controlados
-
----
-
-# 📊 Status atual
-
-**🟡 Em desenvolvimento**
-
-### Concluído
-
-- [x] Definição do conceito do LegacyTechLab
-- [x] Identificação do hardware
-- [x] Análise inicial das limitações
-- [x] Comparação de distribuições Linux
-- [x] Escolha inicial do Xubuntu 24.04
-- [x] Identificação do BIOS Legacy
-- [x] Identificação do particionamento DOS/MBR
-- [x] Análise inicial do armazenamento
-- [x] Investigação com `fdisk`
-- [x] Registro dos problemas do Rufus
-- [x] Registro das mensagens relacionadas ao GRUB
-
-### Em andamento
-
-- [ ] Resolver criação da mídia USB
-- [ ] Realizar boot pelo USB
-- [ ] Testar Xubuntu
-- [ ] Planejar particionamento
-- [ ] Instalar Linux
-- [ ] Configurar dual boot
-
----
-
-# 🧰 Tecnologias e conceitos
-
-### Sistemas Operacionais
-
-`Linux` `Xubuntu` `Ubuntu` `Debian` `Windows`
-
-### Infraestrutura
-
-`IT Infrastructure` `Storage` `Partitioning` `BIOS` `MBR` `GRUB` `Dual Boot`
-
-### Redes
-
-`TCP/IP` `DNS` `DHCP` `SSH` `Routing`
-
-### Cloud
-
-`Cloud Computing` `CLI` `IAM` `Cloud Storage` `Automation` `Monitoring`
-
-### Cibersegurança
-
-`Linux Hardening` `Firewall` `SSH Security` `Logs` `Auditing` `Network Security`
-
-### Troubleshooting
-
-`Rufus` `USB Boot` `GRUB` `Hardware Troubleshooting` `System Troubleshooting`
-
----
-
-# 📁 Estrutura do repositório
-
-```text
-LegacyTechLab/
-│
-├── README.md
-│
-├── docs/
-│   ├── 01-contexto-do-laboratorio.md
-│   ├── 02-analise-do-hardware.md
-│   ├── 03-comparativo-das-distribuicoes.md
-│   ├── 04-planejamento-dual-boot.md
-│   ├── 05-diagnostico-boot-e-disco.md
-│   ├── 06-troubleshooting-rufus.md
-│   ├── 07-erros-e-investigacoes.md
-│   └── 08-instalacao-xubuntu.md
-│
-├── labs/
-│   ├── linux/
-│   ├── networking/
-│   ├── infrastructure/
-│   ├── cloud/
-│   └── cybersecurity/
-│
-├── logs/
-│   └── tentativas-rufus.md
-│
-├── screenshots/
-│   └── README.md
-│
-└── .gitignore
-```
-
----
-
-# 📚 Documentação
-
-A documentação detalhada será organizada em `docs/`.
-
-Cada etapa deverá registrar:
-
-- objetivo;
-- ambiente;
-- procedimento;
-- comandos utilizados;
-- resultado;
-- problemas encontrados;
-- solução;
-- aprendizados.
-
-Os laboratórios práticos serão organizados em `labs/`.
-
-Isso permitirá separar:
-
-**Documentação do ambiente**
-
-de
-
-**Experimentos realizados no ambiente.**
-
----
-
-# 🌱 Evolução planejada
-
-O LegacyTechLab foi projetado para crescer junto com o desenvolvimento técnico do laboratório.
-
-A evolução planejada é:
-
-```text
-Hardware Legado
-       ↓
-Linux
-       ↓
-Redes
-       ↓
-Infraestrutura
-       ↓
-Cloud
-       ↓
-Cibersegurança
-       ↓
-Automação
-       ↓
-Projetos integrados
-```
-
-O mesmo equipamento poderá funcionar como:
-
-- estação Linux;
-- cliente SSH;
-- servidor de serviços leves;
-- estação de administração;
-- ambiente de testes;
-- laboratório de redes;
-- estação para ferramentas Cloud;
-- ambiente de estudos de segurança;
-- plataforma de automação.
-
-A utilização de cada função dependerá das limitações do hardware e dos requisitos específicos de cada laboratório.
-
----
-
-# ♻️ Reaproveitamento tecnológico
-
-Um dos princípios do projeto é explorar o potencial de equipamentos que poderiam ser considerados obsoletos para uso cotidiano.
-
-O objetivo não é demonstrar que hardware antigo pode substituir máquinas modernas em qualquer cenário.
-
-O objetivo é demonstrar que:
-
-> **hardware limitado ainda pode possuir valor quando utilizado no contexto adequado.**
-
-Essa abordagem também permite estudar conceitos importantes de infraestrutura:
-
-- ciclo de vida de equipamentos;
-- capacidade computacional;
-- otimização de recursos;
-- sustentabilidade;
-- software livre;
-- arquitetura;
-- dimensionamento;
-- troubleshooting.
-
----
-
-# 💼 Valor para o portfólio
-
-O LegacyTechLab busca demonstrar competências práticas relacionadas à área de **Tecnologia da Informação**, especialmente:
-
-- Linux;
-- Infraestrutura de TI;
-- Redes;
-- Cloud;
-- Cibersegurança;
-- Hardware;
-- Sistemas Operacionais;
-- Troubleshooting;
-- Automação;
-- Documentação técnica.
-
-O diferencial do projeto é que ele parte de uma **limitação real**:
-
-> hardware antigo.
-
-A partir dessa limitação são tomadas decisões técnicas para construir uma plataforma funcional de aprendizagem e experimentação.
-
-O projeto documenta não apenas o resultado, mas também:
-
-**problemas → hipóteses → testes → erros → soluções → aprendizados.**
-
----
-
-# 🔑 Principais palavras-chave
-
-`Linux` · `IT Infrastructure` · `Infrastructure` · `Networking` · `Cloud Computing` · `Cybersecurity` · `Troubleshooting` · `System Administration` · `Hardware` · `Legacy Hardware` · `Xubuntu` · `Ubuntu` · `Debian` · `Rufus` · `GRUB` · `BIOS` · `MBR` · `Dual Boot` · `TCP/IP` · `DNS` · `DHCP` · `SSH` · `Bash` · `Automation`
-
----
-
-## 📌 Status do projeto
-
-**🟡 Em desenvolvimento**
-
-> O LegacyTechLab está sendo construído de forma incremental. Novos laboratórios, experimentos, configurações e estudos serão adicionados conforme o ambiente evoluir.
-
----
-
-## 👨‍💻 Autor
+## 👤 Autor
 
 **Diogo Teixeira Pena**
 
-Projeto desenvolvido como parte da construção de um portfólio prático voltado à transição e desenvolvimento profissional em **Tecnologia da Informação**, com foco em **Infraestrutura, Linux, Redes, Cloud e Cibersegurança**.
+Projeto desenvolvido como laboratório prático para evolução profissional em **Tecnologia da Informação, Infraestrutura, Linux, Cloud e Cibersegurança**.

@@ -2,8 +2,8 @@
 
 ## Distribuição escolhida
 
-A distribuição inicialmente selecionada para o LegacyTechLab é o
-**Xubuntu 24.04**.
+A distribuição selecionada para o LegacyTechLab é o **Xubuntu 24.04.4
+LTS** (base Ubuntu 24.04.4 LTS, codinome Noble Numbat).
 
 ## Motivações
 
@@ -32,11 +32,30 @@ relacionados a:
 -   automação;
 -   troubleshooting.
 
-## Estado da implementação
+## Estado da implementação (atualizado)
 
-A mídia USB foi criada e o equipamento conseguiu realizar boot por ela.
+-   [x] Mídia USB criada e boot validado no equipamento;
+-   [x] Instalador avançou até o particionamento manual;
+-   [x] Partição `ext4` (`/dev/sda4`, 80,53 GB) criada com sucesso via
+    GParted, validada pelo Linux (montagem/desmontagem sem erro);
+-   [x] Causa raiz do erro de particionamento do instalador
+    identificada (ver `12-troubleshooting-particionamento-ext4.md`);
+-   [x] Contorno funcional encontrado (definir o tamanho da partição em
+    **Bytes**, com o valor exato, em vez de MB arredondado);
+-   [ ] Instalação do Xubuntu efetivamente concluída;
+-   [ ] Boot validado a partir do SSD.
 
-A instalação avançou até a etapa de particionamento, onde foi
-identificado um problema durante a criação da partição `ext4`.
+A instalação **ainda não está concluída** — o próximo passo é repetir o
+fluxo completo do instalador usando o contorno confirmado e validar até
+o fim.
 
-Portanto, a instalação ainda não está concluída.
+## Evidências visuais
+
+### Versão do sistema Ubuntu/Xubuntu
+
+![Versão do sistema Ubuntu/Xubuntu](../screenshots/system/02-terminal-lsb-release-ubuntu-24-04-4.png)
+
+### Release Noble Numbat
+
+![Release Noble Numbat](../screenshots/system/03-terminal-os-release-noble-numbat.png)
+

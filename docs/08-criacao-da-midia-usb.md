@@ -54,3 +54,6 @@ particionamento.
 
 O próximo desafio técnico passou a ser a criação e configuração das
 partições necessárias para o Xubuntu.
+
+## Evidências visuais
+

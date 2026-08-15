@@ -7,7 +7,7 @@ existente.
 
 ## Premissa
 
-Antes de qualquer alteração no armazenamento, é necessário confirmar:
+Antes de qualquer alteração no armazenamento, foi necessário confirmar:
 
 -   qual unidade contém o Windows;
 -   qual unidade corresponde ao SSD;
@@ -27,9 +27,10 @@ Tabela de partição: DOS / MBR
 
 ## Estratégia
 
-A instalação deve priorizar a preservação dos dados existentes.
-
-O fluxo planejado é:
+A instalação priorizou a preservação dos dados existentes. O espaço
+para o Linux foi liberado previamente pelo Windows (redução de
+partição), resultando em ~80,53 GB de espaço livre entre `sda2` e
+`sda3`.
 
 ``` text
 Diagnóstico
@@ -49,10 +50,22 @@ Validação do boot
 
 ## Estado atual
 
-O processo já chegou à etapa de particionamento do instalador do
-Xubuntu.
+-   A partição `sda4` (ext4, 80,53 GB) já foi criada com sucesso via
+    GParted, preservando `sda1`, `sda2` e `sda3` intactas.
+-   O instalador Subiquity apresentou três erros distintos durante o
+    processo (documentados em
+    `12-troubleshooting-particionamento-ext4.md`), o último dos quais
+    já teve a causa raiz identificada e um contorno confirmado.
+-   A instalação definitiva do Xubuntu no SSD, preservando o dual boot
+    com o Windows, ainda não foi concluída.
 
-Durante uma tentativa de criação da partição `ext4`, foi identificado um
-problema que passou a ser o foco atual do troubleshooting.
+## Evidências visuais
 
-A instalação definitiva ainda não foi concluída.
+### Estrutura original do disco
+
+![Estrutura original do disco](../screenshots/partitioning/01-fdisk-lsblk-original-partition-table.png)
+
+### Configuração Legacy OS Boot
+
+![Configuração Legacy OS Boot](../screenshots/bios/02-legacy-os-boot-enabled-confirmed.png)
+
